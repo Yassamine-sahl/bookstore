@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Auteur index{% endblock %}
+
+{% block body %}
+        <a href="{{ path('auteur_new') }}" class="btn btn-success mt-3" >Ajouter nouvelle aute</a><br><br>
+<div class="card-columns">
+  {% for auteur in auteurs %}
+  <div class="card">
+    <img class="card-img-top" src="{{ asset('pic/book.jpg') }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ auteur.nomPrenom }}</h5>
+      <p class="card-text">
+      <h6>Sexe  : {{ auteur.sexe }}</h6>
+        <h6>nationalite :  {{ auteur.nationalite }}</h6>
+      </p>
+      <p class="card-text"><small class="text-muted">{{ auteur.dateDeNaissance ? auteur.dateDeNaissance|date('Y-m-d') : '' }}</small>
+      
+                     {{ include('auteur/_delete_form.html.twig') }}
+      </p>
+    </div>
+  </div>
+   
+
+        {% else %}
+           
+                <h1 >no records found</h1>
+           
+        {% endfor %}
+        </div>
+
+    
+{% endblock %}

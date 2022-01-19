@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Auteur{% endblock %}
+
+{% block body %}
+    <h1>Auteur</h1>
+
+         <div class="card bg-dark text-black" width="100%" height="100%">
+  <img class="card-img" src="{{ asset('pic/book1.jpg') }}" alt="Card image">
+  <div class="card-img-overlay">
+ <a href="{{ path('auteur_edit', {'id': auteur.id}) }}" class="btn btn-success mt-1 mb-1">edit</a>
+    <h2 class="card-title">{{ auteur.nomPrenom }}</h2>
+    <p class="card-text">
+        <h4>Sexe  : {{ auteur.sexe }}</h4>
+        <h4>Date de naissance:  {{ auteur.dateDeNaissance ? auteur.dateDeNaissance|date('Y-m-d') : '' }}</h4>
+        <h4>Nationalite : {{ auteur.nationalite }}</h4><br>
+    </p>
+    <p class="card-text">
+    <br>
+    <h3>Livres </h3>
+        <div class="card-columns">
+  {% for livre in livres %}
+  <div class="card">
+   
+    <div class="card-body">
+      <h5 class="card-title">{{ livre.titre }}</h5>
+      <p class="card-text">
+      <h6>ISBN  : {{ livre.isbn }}</h6>
+        <h6>Nombre des pages :  {{ livre.nombrePages }}</h6>
+        <h6>Note : {{ livre.note  }}</h6>
+      </p>
+      <p class="card-text"><small class="text-muted">{{ livre.dateDeParution ? livre.dateDeParution|date('Y-m-d') : '' }}</small>
+      
+                    
+      </p>
+    </div>
+  </div>
+   
+  
+    {% endfor %}
+</div>
+  
+      </p>
+    </div>
+   
+           
+      
+    
+
+
+   
+{% endblock %}

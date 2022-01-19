@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livres
+{% endblock %}
+
+{% block body %}
+	{% if livres|length > 0  %}
+		<h1>Livres</h1>
+
+		<table id="livres" class="table">
+			<thead>
+				<tr>
+					<th>Isbn</th>
+					<th>Titre</th>
+					<th>Nombre de pages</th>
+					<th>Date de parution</th>
+					<th>Note</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for livre in livres %}
+					<tr>
+						<td>{{ livre.isbn }}</td>
+						<td>{{ livre.titre }}</td>
+						<td>{{ livre.nombrePages }}</td>
+						<td>{{ livre.dateDeParution ? livre.dateDeParution|date('Y-m-d') : '' }}</td>
+						<td>{{ livre.note }}</td>
+						<td>
+							<a class="btn btn-primary" href="{{ path('livre_show', {'id': livre.id}) }}">Afficher</a>
+							{% if is_granted('ROLE_ADMIN') %}
+								<a class="btn btn-primary" href="{{ path('livre_edit', {'id': livre.id}) }}">Modifier</a>
+								{{ include('livre/_delete_form.html.twig') }}
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+	{% else %}
+		<p class="alert alert-danger">Aucun résultat</p>
+	{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+	<script src="/js/main.js"></script>
+{% endblock %}
